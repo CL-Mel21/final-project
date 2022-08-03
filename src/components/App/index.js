@@ -5,18 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Homepage />} />
-        <Route path="/results">
-          <Route path=":input"  element={<SearchResults />} />
-        </Route>
-        <Route path="/book">
-          <Route path=":bookId"  element={<BookDetail />} />
-        </Route>
+        <Route path="/results/:input" element={<SearchResults />} />
+        <Route path="/book/:bookId" element={<BookDetail />} />
         <Route path="*" element={<Homepage />} />
       </Routes>
-    </BrowserRouter>
   );
 };
 
