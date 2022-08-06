@@ -62,7 +62,7 @@ const BookList = ({ book }) => {
             ) : (
               <Box sx={{ border: "2px solid grey" }}>No Image Available</Box>
             )}
-            <Box
+            {/* <Box
               sx={{
                 color: "text.secondary",
                 p: 2,
@@ -71,7 +71,7 @@ const BookList = ({ book }) => {
               }}
             >
               Written by {book.volumeInfo.authors.join(",")}
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       </ThemeProvider>

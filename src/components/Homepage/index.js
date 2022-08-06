@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Header from "../Header";
 
 const Homepage = () => {
   const [input, setInput] = useState('');
@@ -9,7 +10,7 @@ const Homepage = () => {
 
   return (
     <>
-      <h1>Find a Book</h1>
+      <Header />
       <strong>Quick Search</strong>
       <input
         data-testid="input-box"
