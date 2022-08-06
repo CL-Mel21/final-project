@@ -36,7 +36,7 @@ const BookDetail = () => {
         <Header />
       </Link>
       <div className="bookDetails">
-        <img src={book.imageLinks.thumbnail} />
+        <img src={book.imageLinks.thumbnail} alt={book.title}/>
         <div>
           <h2>{book.title}</h2>
           {book.authors && <p>Author(s): {book.authors.join(", ")}</p>}
