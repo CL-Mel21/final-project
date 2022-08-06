@@ -2,14 +2,14 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BookList from "../BookList";
 import Header from "../Header";
-import { Pagination, Box } from "@mui/material";
+import { Pagination, Grid } from "@mui/material";
 
 const SearchResults = () => {
-  let params = useParams();
+  let { input } = useParams();
   const [bookList, setBookList] = useState([]);
   useEffect(() => {
     fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${params.input}&maxResults=40`
+      `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=24`
     )
       .then((response) => {
         return response.json();
@@ -19,25 +19,33 @@ const SearchResults = () => {
         setBookList(jsonData.items);
       })
       .catch((error) => console.log(error.message));
-  }, [params]);
+  }, [input]);
 
   return (
     <>
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Header />
       </Link>
-      <Pagination count={10} variant="outlined" color="secondary" />
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-around",
-        }}
+      <Pagination
+        count={10}
+        variant="outlined"
+        style={{ margin: "0 auto 30px", width: "350px" }}
+      />
+
+      <Grid
+        container
+        columns={{ xs: 4, sm: 7, md: 10, lg: 12 }}
+        direction="row"
+        justifyContent="center"
       >
         {bookList.map((book) => {
-          return <BookList key={book.id} book={book} />;
+          return (
+            <Grid item xs={3} key={book.id}>
+              <BookList book={book} />
+            </Grid>
+          );
         })}
-      </Box>
+      </Grid>
     </>
   );
 };
