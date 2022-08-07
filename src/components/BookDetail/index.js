@@ -1,6 +1,6 @@
 import { Box, Stack, Rating } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Header from "../Header";
 
 const BookDetail = () => {
@@ -17,6 +17,7 @@ const BookDetail = () => {
     imageLinks: {},
     industryIdentifiers: [],
   });
+  let navigate = useNavigate();
   const url = `https://www.googleapis.com/books/v1/volumes/${params.bookId}`;
   useEffect(() => {
     fetch(url)
@@ -35,6 +36,24 @@ const BookDetail = () => {
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Header />
       </Link>
+      <Box
+        sx={{
+          margin: "0",
+          width: "100%",
+          height: "50px",
+          alignItems: "center",
+          justifyContent:"center",
+          fontSize:"1.5rem",
+          fontWeight:"Bold",
+          color:"#9a6602",
+          display: "flex",
+          background:
+            "linear-gradient(180deg, rgba(255,254,253,0.3) 0%, rgba(243,243,242,0.5) 30%, rgba(243,243,242,0.5) 70%, rgba(233,233,233,0.3) 100%)",
+        }}
+        onClick={() => navigate(-1)}
+      >
+        Back to Search Results
+      </Box>
       <Box
         sx={{
           maxWidth: "800px",
