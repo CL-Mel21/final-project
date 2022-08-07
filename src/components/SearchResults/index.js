@@ -1,8 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import BookList from "../BookList";
+import { Pagination, Box } from "@mui/material";
+import BookListLayout from "../BookListLayout";
 import Header from "../Header";
-import { Pagination, Grid, Box } from "@mui/material";
 
 const SearchResults = () => {
   let { input } = useParams();
@@ -11,7 +11,9 @@ const SearchResults = () => {
   const [pageCount, setPageCount] = useState(4);
   useEffect(() => {
     fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=24&startIndex=${(currentPage-1)*24+1}`
+      `https://www.googleapis.com/books/v1/volumes?q=${input}&maxResults=24&startIndex=${
+        (currentPage - 1) * 24 + 1
+      }`
     )
       .then((response) => {
         return response.json();
@@ -23,19 +25,18 @@ const SearchResults = () => {
       .catch((error) => console.log(error.message));
   }, [input, currentPage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (bookList.length < 24) {
-      setPageCount(currentPage)
+      setPageCount(currentPage);
     } else {
-      setPageCount(currentPage+3)
+      setPageCount(currentPage + 3);
     }
-  },[bookList, currentPage]);
+  }, [bookList, currentPage]);
 
-const handleSelectPage = (e, num) =>{
-  console.log(num)
-  setCurrentPage(num);
-}
-
+  const handleSelectPage = (e, num) => {
+    console.log(num);
+    setCurrentPage(num);
+  };
 
   return (
     <>
@@ -47,9 +48,9 @@ const handleSelectPage = (e, num) =>{
           margin: "0",
           width: "100%",
           height: "50px",
-          alignItems:"center",
-          justifyContent:"center",
-          display:"flex",
+          alignItems: "center",
+          justifyContent: "center",
+          display: "flex",
           background:
             "linear-gradient(180deg, rgba(255,254,253,0.3) 0%, rgba(243,243,242,0.5) 30%, rgba(243,243,242,0.5) 70%, rgba(233,233,233,0.3) 100%)",
         }}
@@ -62,8 +63,8 @@ const handleSelectPage = (e, num) =>{
           onChange={handleSelectPage}
         />
       </Box>
-
-      <Grid
+      <BookListLayout bookList={bookList} />
+      {/* <Grid
         container
         columns={{ xs: 4, sm: 7, md: 10, lg: 12 }}
         direction="row"
@@ -76,7 +77,7 @@ const handleSelectPage = (e, num) =>{
             </Grid>
           );
         })}
-      </Grid>
+      </Grid> */}
     </>
   );
 };
